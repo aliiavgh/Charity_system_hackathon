@@ -14,6 +14,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
 
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -27,7 +28,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     #apps
-    'applications.account'
+    'applications.account',
 ]
 
 MIDDLEWARE = [
@@ -108,3 +109,15 @@ SWAGGER_SETTINGS = {
         }
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_USE_TLS = True
+
+AUTH_USER_MODEL = 'account.CustomUser'
+
+BROKER_URL = 'redis://127.0.0.1:6379/0'
+BROKER_TRANSPORT = 'redis'
